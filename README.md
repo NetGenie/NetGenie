@@ -35,7 +35,7 @@ NetGenie is a React-based web application designed to help users create professi
 
 *   React
 *   React Router DOM
-*   CSS
+*   Tailwind CSS
 
 ## Getting Started
 
@@ -48,7 +48,7 @@ NetGenie is a React-based web application designed to help users create professi
 2.  **Navigate to the project directory:**
 
     ```bash
-    cd genova
+    cd NetGenie
     ```
 
 3.  **Install dependencies:**
@@ -63,5 +63,5 @@ NetGenie is a React-based web application designed to help users create professi
     npm run dev # or yarn start
     ```
 
-5.  **Open your browser and navigate to `http://localhost:5173` (or the address shown in your terminal).**
+5.  **Open your browser and navigate to `http://localhost:5174` (or the address shown in your terminal).**
 
