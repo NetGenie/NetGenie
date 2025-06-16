@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+
+const IndustrialInsights = () => {
+  const [insights, setInsights] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchInsights = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/fetch-industrial-insights", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keyword: "Software Engineer", location: "Bangalore" }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch insights");
+
+      const data = await response.json();
+      setInsights(data);
+    } catch (err) {
+      setError(err.message);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="p-6 max-w-xl mx-auto bg-gray-900 text-white rounded-lg shadow-md">
+      <h2 className="text-xl font-bold mb-4">Live Industrial Insights</h2>
+      <button
+        onClick={fetchInsights}
+        className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded text-white"
+      >
+        Fetch Insights
+      </button>
+
+      {loading && <p className="mt-4 text-yellow-400">Fetching data...</p>}
+      {error && <p className="mt-4 text-red-500">Error: {error}</p>}
+
+      {insights && (
+        <div className="mt-4">
+          <h3 className="font-semibold text-lg">Results:</h3>
+          <ul className="list-disc ml-6">
+            {insights.results.map((item, idx) => (
+              <li key={idx}>
+                <strong>{item.title}</strong> – {item.company} ({item.location})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default IndustrialInsights;
